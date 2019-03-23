@@ -1,18 +1,32 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const base64Img = require('base64-img')
+
 require('dotenv').config()
 
 const app = express()
-app.use(require('body-parser').urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(
+    require('body-parser').urlencoded({
+        extended: true,
+        limit: '50mb',
+        parameterLimit: '50000'
+    })
+)
+app.use(bodyParser.json({ limit: '50mb' }))
 
 app.post('/image', (req, res) => {
-    console.log(req.body)
+    base64Img.img(req.body.data, '', 'test', (err, filepath) => {
+        if (err) {
+            res.sendStatus(500)
+        }
 
-    res.send('Henlo boi')
+        let pathname = `${__dirname}/${filepath}`
+
+        res.send(200, pathname)
+    })
 })
 
 app.listen(process.env.PORT, () => {
     console.log(`Server up and running at port: ${process.env.PORT}`)
+    console.log(`Filepath: ${__dirname}`)
 })
-console.log('heloo')

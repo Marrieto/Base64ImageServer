@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Marrieto/Base64ImageServer#readme",
   "dependencies": {
+    "base64-img": "^1.0.4",
     "body-parser": "^1.18.3",
     "dotenv": "^7.0.0",
     "express": "^4.16.4"
