@@ -24,15 +24,20 @@ app.use(function(req, res, next) {
 })
 
 app.post('/image', (req, res) => {
-    base64Img.img(req.body.data, '', 'test', (err, filepath) => {
-        if (err) {
-            res.sendStatus(500)
+    base64Img.img(
+        req.body.data,
+        '/var/www/wsApp/client/build/static',
+        'test',
+        (err, filepath) => {
+            if (err) {
+                res.sendStatus(500)
+            }
+
+            let pathname = `${__dirname}/${filepath}`
+
+            res.send(200, pathname)
         }
-
-        let pathname = `${__dirname}/${filepath}`
-
-        res.send(200, pathname)
-    })
+    )
 })
 
 app.listen(process.env.PORT, () => {
