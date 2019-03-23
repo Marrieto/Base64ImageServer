@@ -14,6 +14,15 @@ app.use(
 )
 app.use(bodyParser.json({ limit: '50mb' }))
 
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept'
+    )
+    next()
+})
+
 app.post('/image', (req, res) => {
     base64Img.img(req.body.data, '', 'test', (err, filepath) => {
         if (err) {
