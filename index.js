@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const base64Img = require('base64-img')
+const moment = require('moment')
 
 require('dotenv').config()
 
@@ -24,16 +25,18 @@ app.use(function(req, res, next) {
 })
 
 app.post('/image', (req, res) => {
+    let time = Date.now()
+
     base64Img.img(
         req.body.data,
         '/root/LifeOfPi/public/clientapp/build/static',
-        'test',
+        `${time}`,
         (err, filepath) => {
             if (err) {
                 res.sendStatus(500)
             }
 
-            let pathname = `${__dirname}/${filepath}`
+            let pathname = time
 
             res.send(200, pathname)
         }
