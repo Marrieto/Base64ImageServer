@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
 app.post('/image', (req, res) => {
     base64Img.img(
         req.body.data,
-        '/var/www/wsApp/client/build/static',
+        '/root/LifeOfPi/public/clientapp/build/static',
         'test',
         (err, filepath) => {
             if (err) {
