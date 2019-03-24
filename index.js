@@ -68,7 +68,7 @@ app.post('/movement', async (req, res) => {
         )
     })
 
-    console.log(returningArray)
+    // console.log(returningArray)
 
     res.send(returningArray)
 })
