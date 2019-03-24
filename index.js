@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const base64Img = require('base64-img')
-const moment = require('moment')
+const Moment = require('moment')
 const Sensor = require('./Models/Sensor')
 
 require('dotenv').config()
@@ -53,6 +53,16 @@ app.post('/movement', async (req, res) => {
 
     movements.forEach((movement) => {
         returningArray.push(movement.createdAt)
+    })
+
+    movements.map((value) => {
+        let temp = Moment(value).add(1, 'hours')
+        let tempMonth = Moment(temp).format('M')
+        let tempDay = Moment(temp).format('D')
+        let tempHours = Moment(temp).format('H')
+        let tempMinutes = Moment(temp).format('mm')
+
+        return `${tempMonth}/${tempDay} - ${tempHours}:${tempMinutes}`
     })
 
     console.log(returningArray)
