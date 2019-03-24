@@ -55,7 +55,7 @@ app.post('/movement', async (req, res) => {
         returningArray.push(movement.createdAt)
     })
 
-    movements.map((value) => {
+    returningArray.map((value) => {
         let temp = Moment(value).add(1, 'hours')
         let tempMonth = Moment(temp).format('M')
         let tempDay = Moment(temp).format('D')
