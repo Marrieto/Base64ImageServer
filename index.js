@@ -47,7 +47,7 @@ app.post('/image', (req, res) => {
 app.post('/movement', async (req, res) => {
     let movements = await Sensor.find({})
         .sort('createdAt')
-        .count(5)
+        .slice(5)
 
     console.log(movements)
 
