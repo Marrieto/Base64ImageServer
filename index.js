@@ -44,7 +44,7 @@ app.post('/image', (req, res) => {
     )
 })
 
-app.post('/movement', async (req, res) => {
+app.get('/movement', async (req, res) => {
     let movements = await Sensor.find({})
         .sort('-createdAt')
         .limit(5)
