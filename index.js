@@ -49,20 +49,23 @@ app.post('/movement', async (req, res) => {
         .sort('-createdAt')
         .limit(5)
 
+    let tempArray = []
     let returningArray = []
 
     movements.forEach((movement) => {
-        returningArray.push(movement.createdAt)
+        tempArray.push(movement.createdAt)
     })
 
-    returningArray.map((value) => {
+    tempArray.forEach((value) => {
         let temp = Moment(value).add(1, 'hours')
         let tempMonth = Moment(temp).format('M')
         let tempDay = Moment(temp).format('D')
         let tempHours = Moment(temp).format('H')
         let tempMinutes = Moment(temp).format('mm')
 
-        return `${tempMonth}/${tempDay} - ${tempHours}:${tempMinutes}`
+        returningArray.push(
+            `${tempMonth}/${tempDay} - ${tempHours}:${tempMinutes}`
+        )
     })
 
     console.log(returningArray)
