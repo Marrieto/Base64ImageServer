@@ -49,7 +49,13 @@ app.post('/movement', async (req, res) => {
         .sort('-createdAt')
         .limit(5)
 
-    console.log(movements)
+    let returningArray = []
+
+    movements.forEach((movement) => {
+        returningArray.push(movement.createdAt)
+    })
+
+    console.log(returningArray)
 
     res.sendStatus(200)
 })
