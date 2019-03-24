@@ -70,7 +70,7 @@ app.post('/movement', async (req, res) => {
 
     console.log(returningArray)
 
-    res.sendStatus(200)
+    res.send(returningArray)
 })
 
 app.listen(process.env.PORT, () => {
