@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const base64Img = require('base64-img')
 const moment = require('moment')
+const Sensor = require('./Models/Sensor')
 
 require('dotenv').config()
 
@@ -41,6 +42,16 @@ app.post('/image', (req, res) => {
             res.send(200, pathname)
         }
     )
+})
+
+app.post('/movement', async (req, res) => {
+    let movements = await Sensor.find({})
+        .sort('createdAt')
+        .count(5)
+
+    console.log(movements)
+
+    res.sendStatus(200)
 })
 
 app.listen(process.env.PORT, () => {
